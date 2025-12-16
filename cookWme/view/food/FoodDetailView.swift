@@ -90,9 +90,9 @@ struct FoodDetailView: View {
                                     ingredient.isChecked.toggle()
                                     
                                     if ingredient.isChecked {
-                                        dataService.addIngredientToShoppingList(ingredient: ingredient)
+                                        dataService.addIngredientToShoppingList(ingredient: ingredient, recipeName: food.name)
                                     } else {
-                                        dataService.removeIngredientFromShoppingList(ingredient: ingredient)
+                                        dataService.removeIngredientFromShoppingList(ingredient: ingredient, recipeName: food.name)
                                     }
                                 }
                         }
@@ -104,7 +104,7 @@ struct FoodDetailView: View {
                 .cornerRadius(16)
                 .padding(.horizontal)
                 
-                
+
                 // MARK: - STEPS CARD
                 VStack(alignment: .leading, spacing: 18) {
                     Text("Yapılışı")
@@ -129,6 +129,8 @@ struct FoodDetailView: View {
                         }
                     }
                 }
+                
+                .frame(width: 330, alignment: .leading)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(16)

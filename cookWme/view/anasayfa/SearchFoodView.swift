@@ -43,3 +43,8 @@ struct SearchFoodView: View {
         }
     }
 }
+#Preview {
+    
+    SearchFoodView()
+        .environmentObject(FoodDataService())
+}

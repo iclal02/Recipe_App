@@ -85,7 +85,7 @@ final class FoodDataService: ObservableObject {
     }
     
     // alışveris sepetine ekleme
-    func addIngredientToShoppingList(ingredient: Ingredient) {
+    func addIngredientToShoppingList(ingredient: Ingredient, recipeName: String) {
         // Basit ayrıştırma: isim içinde miktar varsa ayır
         // Eğer ingredient.name "2 dilim Kaşar" şeklindeyse,
         // burada basitçe son kelimeyi itemName kabul ediyorum.
@@ -103,8 +103,9 @@ final class FoodDataService: ObservableObject {
         }
         
         let newItem = ShoppingList(
-            name: itemName,
+            name: ingredient.name,
             amount: amount,
+            recipeName: recipeName,
             isreceived: false
         )
         
@@ -113,13 +114,25 @@ final class FoodDataService: ObservableObject {
     }
     
     // sepetten çıkarma
-    func removeIngredientFromShoppingList(ingredient: Ingredient) {
+    func removeIngredientFromShoppingList(ingredient: Ingredient, recipeName: String) {
         // Listedeki aynı isme sahip ürünü bul
-        if let index = shoppingList.firstIndex(where: { $0.name.lowercased() == ingredient.name.lowercased() }) {
-            shoppingList.remove(at: index)
-            print("\(ingredient.name) sepetten çıkarıldı.")
+        shoppingList.removeAll {
+                $0.name.lowercased() == ingredient.name.lowercased() &&
+                $0.recipeName == recipeName
+            }
+    }
+    
+    func deleteShoppingItems(at offsets: IndexSet, in items: [ShoppingList]) {
+        for index in offsets {
+            let item = items[index]
+            
+            shoppingList.removeAll {
+                $0.id == item.id
+            }
         }
     }
+
+    
     
     // MARK: - CATEGORY
     // Belirli bir kategoriye ait yemekleri filtreleyen fonksiyon
@@ -142,6 +155,10 @@ final class FoodDataService: ObservableObject {
         currentUser.email = newEmail
         // Şifre güncellemeleri veya daha karmaşık işlemler buraya gelecektir.
     }
+    func logoutUser() {
+        print("Çıkış yapıldı")
+    }
+
     
     // MARK: - SORT FUNCTION
     // sıralama fonksiyonu

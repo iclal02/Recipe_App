@@ -37,7 +37,7 @@ struct FoodListView: View {
                     .padding(.horizontal)
                     .padding(.top)
 
-                
+
                 // MARK: - IZGARA
                 let gridColumns = [GridItem(.flexible()),
                                    GridItem(.flexible())]

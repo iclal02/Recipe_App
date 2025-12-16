@@ -13,41 +13,64 @@ struct FavoritesView: View {
     @State private var showAddEtiket = false
     @State private var etiketName = ""
     
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 24) {
                 
+                // HEADER
                 HStack {
-                    Text("Favori Etiketler")
-                        .font(.largeTitle)
-                        .bold()
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Favori Etiketler")
+                            .font(.largeTitle)
+                            .bold()
+                        
+                        Text("Tariflerini gruplandır")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    
                     Spacer()
-                    Button(action: { showAddEtiket = true }) {
-                        Image(systemName: "plus.circle.fill")
+                    
+                    Button {
+                        showAddEtiket = true
+                    } label: {
+                        Image(systemName: "plus")
                             .font(.title2)
-                            .foregroundColor(.orange)
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .background(Color.green.opacity(0.5))
+                            .clipShape(Circle())
                     }
                 }
                 .padding(.horizontal)
                 
-                // FAVORI ETIKETLER GRID
-                let columns = [GridItem(.flexible()), GridItem(.flexible())]
-                
+                // GRID
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(dataService.user.favoriEtiketleri) { etiket in
                         NavigationLink {
                             EtiketDetailView(etiket: etiket)
                         } label: {
-                            VStack {
+                            VStack(spacing: 12) {
+                                Image(systemName: "tag.fill")
+                                    .font(.title)
+                                    .foregroundColor(.white.opacity(0.9))
+                                
                                 Text(etiket.name)
                                     .font(.headline)
                                     .foregroundColor(.white)
-                                    .padding()
                             }
                             .frame(maxWidth: .infinity, minHeight: 120)
-                            .background(.gray.opacity(0.75))
-                            .cornerRadius(16)
-                            .shadow(radius: 5)
+                            .background(
+                                LinearGradient(
+                                    colors: [Color.green.opacity(0.5), Color.green.opacity(0.3)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .cornerRadius(18)
+                            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
                         }
                     }
                 }
@@ -60,23 +83,23 @@ struct FavoritesView: View {
     }
     
     var yeniEtiketSheet: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text("Yeni Etiket Oluştur")
-                    .font(.title2)
+        NavigationStack {
+            VStack(spacing: 24) {
+                Text("Yeni Etiket")
+                    .font(.title)
                     .bold()
                 
-                TextField("Etiket Adı", text: $etiketName)
+                TextField("Etiket adı", text: $etiketName)
                     .padding()
                     .background(Color(.systemGray6))
-                    .cornerRadius(8)
+                    .cornerRadius(12)
                 
                 Button("Kaydet") {
                     if !etiketName.isEmpty {
                         dataService.addEtiket(name: etiketName)
                     }
-                    showAddEtiket = false
                     etiketName = ""
+                    showAddEtiket = false
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
@@ -84,11 +107,16 @@ struct FavoritesView: View {
                 Spacer()
             }
             .padding()
+            .navigationTitle("Etiket Oluştur")
+            .navigationBarTitleDisplayMode(.inline)
         }
+        .presentationDetents([.medium])
     }
 }
 
 
+
 #Preview {
     FavoritesView()
+        .environmentObject(FoodDataService())
 }
