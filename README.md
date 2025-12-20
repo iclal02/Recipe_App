@@ -21,4 +21,4 @@ Kullanıcılar tarifleri inceleyebilir, favorilerine ekleyebilir ve seçtikleri 
 - Git & GitHub
 
 ## Uygulama Videosu
-🎥 [Demo videosunu izlemek için tıklayın]((https://youtu.be/ukIYDLBsqP0))
+🎥 **[Demo videosunu izlemek için tıklayın]((https://youtu.be/ukIYDLBsqP0))**
