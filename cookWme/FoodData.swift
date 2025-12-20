@@ -44,24 +44,6 @@ struct FoodData {
             isFavorite: false
         ),
         
-        // Sufle
-        Food(
-            imageName: "sufle_resmi",
-            name: "Sufle",
-            cookingTime: 60,
-            dificultlyLevel: .hard,
-            ingredients: [
-                Ingredient(name: "100 gram Bitter Çikolata"),
-                Ingredient(name: "2 adet Yumurta"),
-                Ingredient(name: "3 yemek kaşığı Şeker")
-            ],
-            recipe: [
-                "Çikolatayı eritip diğer malzemelerle karıştırın.",
-                "Fırında kabarana kadar pişirin."
-            ],
-            categories: "Tatlı",
-            isFavorite: false
-        ),
         
         // Mercimek Çorbası
         Food(
@@ -85,7 +67,7 @@ struct FoodData {
         
         // Ezogelin Çorbası
         Food(
-            imageName: "ezogelin",
+            imageName: "ezogelin_corbasi",
             name: "Ezogelin Çorbası",
             cookingTime: 35,
             dificultlyLevel: .medium,
@@ -124,7 +106,7 @@ struct FoodData {
         
         // Tarhana Çorbası
         Food(
-            imageName: "tarhana",
+            imageName: "tarhana_corbasi",
             name: "Tarhana Çorbası",
             cookingTime: 20,
             dificultlyLevel: .easy,
@@ -218,7 +200,7 @@ struct FoodData {
         
         // Simit Tabağı
         Food(
-            imageName: "simit_tabağı",
+            imageName: "simit_tabagı",
             name: "Simit Tabağı",
             cookingTime: 5,
             dificultlyLevel: .easy,
@@ -236,7 +218,7 @@ struct FoodData {
         
         // Kaşarlı Tost
         Food(
-            imageName: "kahvalti_tost",
+            imageName: "kasarli_tost",
             name: "Kaşarlı Tost",
             cookingTime: 7,
             dificultlyLevel: .easy,
@@ -345,7 +327,7 @@ struct FoodData {
         
         // Izgara Köfte
         Food(
-            imageName: "kofte",
+            imageName: "ızgara_kofte",
             name: "Izgara Köfte",
             cookingTime: 30,
             dificultlyLevel: .medium,
@@ -381,7 +363,7 @@ struct FoodData {
         
         // Patlıcan Musakka
         Food(
-            imageName: "musakka",
+            imageName: "patlican_musakka",
             name: "Patlıcan Musakka",
             cookingTime: 40,
             dificultlyLevel: .medium,
@@ -417,7 +399,7 @@ struct FoodData {
         
         // Tavuklu Şehriye
         Food(
-            imageName: "corba_aksam",
+            imageName: "tavuklu_sehriye",
             name: "Tavuklu Şehriye",
             cookingTime: 25,
             dificultlyLevel: .easy,
@@ -525,7 +507,7 @@ struct FoodData {
         
         // Patates Kızartması
         Food(
-            imageName: "patates_kizartma",
+            imageName: "patates_kizartmasi",
             name: "Patates Kızartması",
             cookingTime: 20,
             dificultlyLevel: .easy,
@@ -543,7 +525,7 @@ struct FoodData {
         
         // Patlamış Mısır
         Food(
-            imageName: "popcorn",
+            imageName: "patlamis_misir",
             name: "Patlamış Mısır",
             cookingTime: 10,
             dificultlyLevel: .easy,

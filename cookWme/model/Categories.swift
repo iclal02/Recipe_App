@@ -15,7 +15,6 @@ struct Categories: Identifiable{
     
 }
 
-
 extension Categories {
     static let tumKategoriler: [Categories] = [
         Categories(name: "Çorba", image: "takeoutbag.and.cup.and.straw"),

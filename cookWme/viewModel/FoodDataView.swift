@@ -15,22 +15,17 @@ final class FoodDataService: ObservableObject {
     // MARK: - PUBLISHED VERİLER
     
     // Uygulamadaki tüm yemeklerin listesi.
-    // '@Published' sayesinde bu dizi değiştiğinde (örn. favori eklendiğinde) arayüz otomatik yenilenir.
+    // '@Published' sayesinde bu dizi değiştiğinde arayüz otomatik yenilenir.
     @Published var allFoods: [Food] = FoodData.ornekYemekler
     
     // Ana sayfada gösterilecek sabit kategoriler
     @Published var allCategories: [Categories] = Categories.tumKategoriler
-    
-    // Kullanıcının kayıtlı bilgisi
-    @Published var currentUser: User = User.ornekKullanici
     
     // Favori yemeklerin dinamik listesi (AllFoods'tan filtrelenecek)
     @Published var favoriteFoods: [Food] = []
     
     // Alışveriş listesi öğeleri
     @Published var shoppingList: [ShoppingList] = []
-    
-    @Published var user: User = .ornekKullanici
     
     @State private var showEtiketPicker = false
     
@@ -41,17 +36,10 @@ final class FoodDataService: ObservableObject {
         // Uygulama ilk açıldığında çalışır.
         loadFavorites()
         loadShoppingList()
-        // Kullanıcı bilgisini de yükleyebiliriz (şimdilik statik)
     }
     
     
-    // MARK: - FUNCTİONS
-    // Kullanıcı bir butona tıkladığında veriyi güncelleyecek fonksiyonlar. Bu, ViewModel'in en temel görevidir.
-    
-    
-    
-    
-    // MARK: - FAVORITES PAGES
+    // MARK: - favori sayfası
     // favorilere ekleme
     func toggleFavorite(food: Food) {
         // AllFoods dizisinde, tıklanan yemeğin (ID'si eşleşen) index'ini bul.
@@ -70,10 +58,8 @@ final class FoodDataService: ObservableObject {
         favoriteFoods = allFoods.filter { $0.isFavorite }
     }
     
-    // MARK: - SHOPPINGLIST PAGES
+    // MARK: - alışveriş sayfası
     private func loadShoppingList() {
-        // İleride kalıcılık eklendiğinde, veriler buradan okunacak.
-        // Şimdilik test için boş bir dizi olarak kalabilir.
         shoppingList = []
     }
     
@@ -134,33 +120,22 @@ final class FoodDataService: ObservableObject {
 
     
     
-    // MARK: - CATEGORY
+    // MARK: - kategorileme
     // Belirli bir kategoriye ait yemekleri filtreleyen fonksiyon
     func getFoods(for category: Categories) -> [Food] {
         return allFoods.filter { $0.categories == category.name }
     }
     
-    // MARK: - DAILYMENU FUNCTION
+    // MARK: - günlük menü fonksiyonu
     // Günün Menüsü için rastgele bir yemek seçer
     func getDailyMenu() -> Food? {
         // Rastgele seçim için 'name' alanı boş olmayanlardan birini seç
         return allFoods.filter { !$0.name.isEmpty }.randomElement()
     }
 
-    // MARK: - PROFILE PAGES
-    
-    // Profil bilgisini günceller
-    func updateProfile(newName: String, newEmail: String) {
-        currentUser.name = newName
-        currentUser.email = newEmail
-        // Şifre güncellemeleri veya daha karmaşık işlemler buraya gelecektir.
-    }
-    func logoutUser() {
-        print("Çıkış yapıldı")
-    }
 
     
-    // MARK: - SORT FUNCTION
+    // MARK: - sıralama fonksiyonları
     // sıralama fonksiyonu
     func sortAndFilterFoods(
         foods: [Food],
@@ -201,29 +176,7 @@ final class FoodDataService: ObservableObject {
         }
     }
     
-    
-    
-    // MARK: - ETİKET
-    //  Etiket oluşturma
-    func addEtiket(name: String) {
-        let yeniEtiket = FavoriEtiket(name: name, foodIDs: [])
-        user.favoriEtiketleri.append(yeniEtiket)
-    }
-    
-    //  Yemeği etikete ekle
-    func addFoodToEtiket(food: Food, etiket: FavoriEtiket) {
-        if let index = user.favoriEtiketleri.firstIndex(where: { $0.id == etiket.id }) {
-            if !user.favoriEtiketleri[index].foodIDs.contains(food.id) {
-                user.favoriEtiketleri[index].foodIDs.append(food.id)
-            }
-        }
-    }
-    
-    //  Etiket içindeki yemekleri al
-    func foodsForEtiket(_ etiket: FavoriEtiket, allFoods: [Food]) -> [Food] {
-        allFoods.filter { etiket.foodIDs.contains($0.id) }
-    }
-    
+
         
 }
 

@@ -23,7 +23,7 @@ struct Food: Identifiable{
 
 struct Ingredient: Identifiable {
     let id: UUID = UUID()
-    var name: String // örn: "250g kıyma"
+    var name: String // 250g kıyma
     var isChecked: Bool = false // Sepete eklenip eklenmediği
 }
 
@@ -34,7 +34,7 @@ enum Level: String, CaseIterable{
     
     var id: String { self.rawValue }
     
-// sıralama yapabilmek icin kullanıcaz
+// sıralama yapabilmek icin kullanacagız
 var comparableValue: Int {
         switch self {
         case .easy : return 1

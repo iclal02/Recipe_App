@@ -11,7 +11,7 @@ struct ShoppingList: Identifiable {
     
     let id: UUID=UUID()
     var name: String
-    var amount: String // miktar
+    var amount: String
     let recipeName: String
     var isreceived : Bool=false // alınıp alınmama durumu
 }
